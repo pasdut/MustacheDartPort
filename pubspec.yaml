@@ -1,0 +1,6 @@
+name:  mustache
+description:  a dart port of mustache, forked from iggymacd
+
+#dependencies:
+#  js: any
+#  unittest: any
