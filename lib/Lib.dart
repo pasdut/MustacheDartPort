@@ -1,5 +1,5 @@
-#library('Templates');
-#import('dart:io');
+library(Templates;;
+import('dart:io';
 #source('tag.dart');
 #source('block.dart');
 #source('template_factory.dart');
