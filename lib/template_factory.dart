@@ -1,3 +1,5 @@
+part of Templates;
+
 class TemplateFactory {
   TemplateFactory(){
     dp = new TemplateParser(this);

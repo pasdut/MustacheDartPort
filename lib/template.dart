@@ -1,3 +1,5 @@
+part of Templates;
+
 class Template{
   Template(this.content):
     blocks = new Map<String, Block>(),
@@ -18,7 +20,7 @@ class Template{
     String result = content;
     List futuresPending = new List();
     try{
-     data.forEach((String key, Dynamic value){
+     data.forEach((String key,  value){
       if(value is List){
         //print('found a list in template');
         String blockRenderResult = blocks[key].render(value);
@@ -31,11 +33,11 @@ class Template{
         //TODO - allow for with and without extension on file - replace /views with variable
         Future futureTemplate = tf.compile('views/$key.template');
         futuresPending.add(futureTemplate);
-            futureTemplate.handleException(onException(exception){
+            futureTemplate.handleException((exception){
                 print('error occurred while processing include!');
               });
             futureTemplate.chain((Template template) => template.render(value))
-            .transform(transformation(returnedString){
+            .transform((returnedString){
 //              print(returnedString.trim());
               result = result.replaceAll('{{>${includes[key].filename}}}', returnedString.trim());
             });
@@ -43,10 +45,10 @@ class Template{
         result = result.replaceAll('{{${tags[key].name}}}', value);
       }
      });
-    }catch(Exception e){
+    }on Exception catch(e){
       completer.completeException(e);
     }
-    Futures.wait(futuresPending).then(onComplete(List futureResults){
+    Futures.wait(futuresPending).then((List futureResults){
       //print('result is $result');
       completer.complete(result);
     });
@@ -59,7 +61,7 @@ class Template{
   * each child element (blocks and variables and includes)
   */
   void parse(String source){
-    //print('in parse, parsing $source');
+    print('[template.parse]parsing $source');
     //identify outermost blocks
     if(!BLOCK_REG_EX.hasMatch(source)){
       print('no blocks found...');
@@ -93,7 +95,7 @@ class Template{
     }
     //check for tags outside the blocks 
     String strippedSource = source;
-    blocks.forEach(f(String key, Block value){
+    blocks.forEach((String key, Block value){
       ////print('stripping ${value.source}');
       strippedSource = strippedSource.replaceAll(value.sourceField, '');
     });

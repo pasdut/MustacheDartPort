@@ -3,11 +3,11 @@ library Templates;
 import 'dart:io';
  
 part 'tag.dart';
-part('block.dart');
-part('template_factory.dart');
-part('template.dart');
-part('include.dart');
-part('template_parser.dart');
+part 'block.dart';
+part 'template_factory.dart' ;
+part 'template.dart' ;
+part 'include.dart' ;
+part 'template_parser.dart';
 /*
 * Regular expressions below are used in the library to accomplish specific tasks.
 * 
@@ -25,6 +25,7 @@ part('template_parser.dart');
 * INCLUDE_REG_EX - identifies variables within the source string that are
 * delimited with {{> opening tags and }} closing tags.
 */
-final RegExp BLOCK_REG_EX = const RegExp('.*{{#(.+?)}}.*\\n([\\s\\S]+)(\\n.*){{\/\\1}}');
-final RegExp VAR_REG_EX = const RegExp('{{([\^>].+?)}}');
-final RegExp INCLUDE_REG_EX = const RegExp('{{>(.+?)}}');
+
+final RegExp BLOCK_REG_EX = new RegExp('.*{{#(.+?)}}.*\\n([\\s\\S]+)(\\n.*){{\/\\1}}');
+final RegExp VAR_REG_EX = new RegExp('{{([\^>].+?)}}');
+final RegExp INCLUDE_REG_EX = new RegExp('{{>(.+?)}}');
